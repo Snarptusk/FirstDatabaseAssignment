@@ -30,7 +30,7 @@
         {
             this.lblName = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lstContacts = new System.Windows.Forms.ListView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cmdDelete = new System.Windows.Forms.Button();
             this.cmdEdit = new System.Windows.Forms.Button();
@@ -63,7 +63,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.listView1);
+            this.groupBox1.Controls.Add(this.lstContacts);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(128, 237);
@@ -71,14 +71,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Contacts";
             // 
-            // listView1
+            // lstContacts
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(3, 16);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(122, 218);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.lstContacts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstContacts.Location = new System.Drawing.Point(3, 16);
+            this.lstContacts.Name = "lstContacts";
+            this.lstContacts.Size = new System.Drawing.Size(122, 218);
+            this.lstContacts.TabIndex = 0;
+            this.lstContacts.UseCompatibleStateImageBehavior = false;
             // 
             // groupBox2
             // 
@@ -132,6 +132,7 @@
             this.cmdSave.TabIndex = 12;
             this.cmdSave.Text = "Save";
             this.cmdSave.UseVisualStyleBackColor = true;
+            this.cmdSave.Click += new System.EventHandler(this.cmdSave_Click);
             // 
             // dtpBirthday
             // 
@@ -259,7 +260,7 @@
 
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lstContacts;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtPostNr;
         private System.Windows.Forms.Label lblPostnr;

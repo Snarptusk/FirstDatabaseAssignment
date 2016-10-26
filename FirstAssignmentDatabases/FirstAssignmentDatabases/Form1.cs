@@ -19,9 +19,19 @@ namespace FirstAssignmentDatabases
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
+        }
+
+        private void cmdSave_Click(object sender, EventArgs e)
+        {
             using (var db = new AdressContext())
             {
-                var people = "hej";
+                var person = new Person { Name = txtName.Text, Adress = txtAdress.Text,
+                    PostNr = txtPostNr.Text, City = txtCity.Text, PhoneNr = txtPhoneNr.Text,
+                    Email = txtEmail.Text, Birthday = dtpBirthday.Value};
+
+                db.Persons.Add(person);
+                db.SaveChanges();
             }
         }
     }
