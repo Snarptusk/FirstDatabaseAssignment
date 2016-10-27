@@ -79,6 +79,8 @@
             this.lstContacts.Size = new System.Drawing.Size(122, 218);
             this.lstContacts.TabIndex = 0;
             this.lstContacts.UseCompatibleStateImageBehavior = false;
+            this.lstContacts.View = System.Windows.Forms.View.List;
+            this.lstContacts.SelectedIndexChanged += new System.EventHandler(this.lstContacts_SelectedIndexChanged);
             // 
             // groupBox2
             // 
@@ -123,6 +125,7 @@
             this.cmdEdit.TabIndex = 13;
             this.cmdEdit.Text = "Edit";
             this.cmdEdit.UseVisualStyleBackColor = true;
+            this.cmdEdit.Click += new System.EventHandler(this.cmdEdit_Click);
             // 
             // cmdSave
             // 
@@ -241,7 +244,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(428, 261);
+            this.ClientSize = new System.Drawing.Size(428, 258);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;

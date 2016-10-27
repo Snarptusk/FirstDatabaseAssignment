@@ -17,27 +17,91 @@ namespace FirstAssignmentDatabases
             InitializeComponent();
         }
 
+        List<Person> people = new List<Person>();
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            LoadContacts();
+        }
+
+        private void LoadContacts()
+        {
+            using (var db = new AdressContext())
+            {
+                var persons = (from p in db.Persons
+                               orderby p.Name
+                               select p).ToArray();
+
+                foreach (var item in persons)
+                {
+                    lstContacts.Items.Add(item.Name);
+                    people.Add(item);
+                }
+            }
         }
 
         private void cmdSave_Click(object sender, EventArgs e)
         {
             using (var db = new AdressContext())
             {
-                var person = new Person { Name = txtName.Text, Adress = txtAdress.Text,
-                    PostNr = txtPostNr.Text, City = txtCity.Text, PhoneNr = txtPhoneNr.Text,
-                    Email = txtEmail.Text, Birthday = dtpBirthday.Value};
+                var person = new Person
+                {
+                    Name = txtName.Text,
+                    Adress = txtAdress.Text,
+                    PostNr = txtPostNr.Text,
+                    City = txtCity.Text,
+                    PhoneNr = txtPhoneNr.Text,
+                    Email = txtEmail.Text,
+                    Birthday = dtpBirthday.Value
+                };
+
+                people.Add(person);
 
                 db.Persons.Add(person);
                 db.SaveChanges();
+
+                lstContacts.Items.Add(person.Name);
+            }
+
+            txtName.Text = "";
+            txtAdress.Text = "";
+            txtPostNr.Text = "";
+            txtCity.Text = "";
+            txtPhoneNr.Text = "";
+            txtEmail.Text = "";
+            dtpBirthday.Value = DateTime.Now;
+        }
+
+        private void lstContacts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                txtName.Text = people[lstContacts.SelectedItems[0].Index].Name;
+                txtAdress.Text = people[lstContacts.SelectedItems[0].Index].Adress;
+                txtPostNr.Text = people[lstContacts.SelectedItems[0].Index].PostNr;
+                txtCity.Text = people[lstContacts.SelectedItems[0].Index].City;
+                txtPhoneNr.Text = people[lstContacts.SelectedItems[0].Index].PhoneNr;
+                txtEmail.Text = people[lstContacts.SelectedItems[0].Index].Email;
+                dtpBirthday.Value = people[lstContacts.SelectedItems[0].Index].Birthday;
+            }
+            catch { }
+        }
+
+        private void cmdEdit_Click(object sender, EventArgs e)
+        {
+            using (var db = new AdressContext())
+            {
+                var persons = from p in db.Persons
+                              orderby p.Name
+                              select p;
+
             }
         }
     }
 
     public class Person
     {
+        public int PersonId { get; set; }
         public string Name { get; set; }
         public string Adress { get; set; }
         public string PostNr { get; set; }
