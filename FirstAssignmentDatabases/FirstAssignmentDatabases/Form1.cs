@@ -19,9 +19,8 @@ namespace FirstAssignmentDatabases
         }
 
         List<Person> people = new List<Person>();
-        List<Person> searchList = new List<Person>();
-
         Person SelectedPerson = null;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadContacts();
@@ -122,9 +121,6 @@ namespace FirstAssignmentDatabases
         {
             try
             {
-                //Search(txtSearch.Text, people);
-
-                //SelectedPerson = people[lstContacts.SelectedIndex];
                 SelectedPerson = (Person)lstContacts.SelectedItem;
 
                 txtName.Text = SelectedPerson.Name;
@@ -140,41 +136,29 @@ namespace FirstAssignmentDatabases
 
         private void cmdSearch_Click(object sender, EventArgs e)
         {
-            Search(txtSearch.Text, people, searchList);
+            Search(txtSearch.Text, people);
         }
 
-        private void Search(string search, List<Person> people, List<Person> searchList)
+        private void Search(string search, List<Person> people)
         {
-
-            //searchList.Clear();
             lstContacts.Items.Clear();
 
-            //using (var db = new AdressContext())
-            //{
-            //    var persons = (from p in db.Persons
-            //                   orderby p.PersonId
-            //                   select p).ToList();
-
-            if (txtSearch.Text != "")
-            {
                 foreach (var item in people)
                 {
                     if (item.Name.Contains(search) || item.City.Contains(search) || item.Adress.Contains(search))
                     {
                         lstContacts.Items.Add(item);
-                        //searchList.Add(item);
                     }
                 }
-                //lstContacts.DataSource = searchList;
-            }
-            //}
         }
 
         private void cmdClear_Click(object sender, EventArgs e)
         {
-            //searchList.Clear();
+            txtSearch.Clear();
 
-            LoadContacts();
+            lstContacts.Items.Clear();
+
+            Search(txtSearch.Text, people);
         }
     }
 
