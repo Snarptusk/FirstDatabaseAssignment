@@ -30,7 +30,7 @@
         {
             this.lblName = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lstContacts = new System.Windows.Forms.ListView();
+            this.lstContacts = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cmdDelete = new System.Windows.Forms.Button();
             this.cmdEdit = new System.Windows.Forms.Button();
@@ -48,6 +48,9 @@
             this.txtAdress = new System.Windows.Forms.TextBox();
             this.lblAdress = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.cmdSearch = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -63,24 +66,25 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cmdSearch);
+            this.groupBox1.Controls.Add(this.txtSearch);
+            this.groupBox1.Controls.Add(this.lblSearch);
             this.groupBox1.Controls.Add(this.lstContacts);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(128, 237);
+            this.groupBox1.Size = new System.Drawing.Size(128, 234);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Contacts";
             // 
             // lstContacts
             // 
-            this.lstContacts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstContacts.Location = new System.Drawing.Point(3, 16);
+            this.lstContacts.FormattingEnabled = true;
+            this.lstContacts.Location = new System.Drawing.Point(6, 16);
             this.lstContacts.Name = "lstContacts";
-            this.lstContacts.Size = new System.Drawing.Size(122, 218);
+            this.lstContacts.Size = new System.Drawing.Size(116, 147);
             this.lstContacts.TabIndex = 0;
-            this.lstContacts.UseCompatibleStateImageBehavior = false;
-            this.lstContacts.View = System.Windows.Forms.View.List;
-            this.lstContacts.SelectedIndexChanged += new System.EventHandler(this.lstContacts_SelectedIndexChanged);
+            this.lstContacts.SelectedIndexChanged += new System.EventHandler(this.lstContacts_SelectedIndexChanged_1);
             // 
             // groupBox2
             // 
@@ -116,6 +120,7 @@
             this.cmdDelete.TabIndex = 14;
             this.cmdDelete.Text = "Delete";
             this.cmdDelete.UseVisualStyleBackColor = true;
+            this.cmdDelete.Click += new System.EventHandler(this.cmdDelete_Click);
             // 
             // cmdEdit
             // 
@@ -240,6 +245,32 @@
             this.txtName.Size = new System.Drawing.Size(170, 20);
             this.txtName.TabIndex = 1;
             // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(42, 163);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(41, 13);
+            this.lblSearch.TabIndex = 1;
+            this.lblSearch.Text = "Search";
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(6, 179);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(116, 20);
+            this.txtSearch.TabIndex = 2;
+            // 
+            // cmdSearch
+            // 
+            this.cmdSearch.Location = new System.Drawing.Point(6, 205);
+            this.cmdSearch.Name = "cmdSearch";
+            this.cmdSearch.Size = new System.Drawing.Size(116, 23);
+            this.cmdSearch.TabIndex = 3;
+            this.cmdSearch.Text = "Search";
+            this.cmdSearch.UseVisualStyleBackColor = true;
+            this.cmdSearch.Click += new System.EventHandler(this.cmdSearch_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -253,6 +284,7 @@
             this.Text = "Adress Book";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -263,7 +295,6 @@
 
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListView lstContacts;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtPostNr;
         private System.Windows.Forms.Label lblPostnr;
@@ -281,6 +312,10 @@
         private System.Windows.Forms.Button cmdDelete;
         private System.Windows.Forms.Button cmdEdit;
         private System.Windows.Forms.Button cmdSave;
+        private System.Windows.Forms.ListBox lstContacts;
+        private System.Windows.Forms.Button cmdSearch;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Label lblSearch;
     }
 }
 
