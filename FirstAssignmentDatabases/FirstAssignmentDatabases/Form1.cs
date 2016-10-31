@@ -28,8 +28,8 @@ namespace FirstAssignmentDatabases
 
         private void LoadContacts()
         {
-            lstContacts.DataSource = null;
             lstContacts.Items.Clear();
+            people.Clear();
 
             using (var db = new AdressContext())
             {
@@ -81,30 +81,38 @@ namespace FirstAssignmentDatabases
 
         private void cmdEdit_Click(object sender, EventArgs e)
         {
-            using (var db = new AdressContext())
+            try
             {
-                SelectedPerson = people[lstContacts.SelectedIndex];
+                using (var db = new AdressContext())
+                {
+                    SelectedPerson = (Person)lstContacts.SelectedItem;
 
-                var editedPerson = db.Persons.Find(SelectedPerson.PersonId);
+                    var editedPerson = db.Persons.Find(SelectedPerson.PersonId);
 
-                editedPerson.Name = txtName.Text;
-                editedPerson.Adress = txtAdress.Text;
-                editedPerson.PostNr = txtPostNr.Text;
-                editedPerson.City = txtCity.Text;
-                editedPerson.PhoneNr = txtPhoneNr.Text;
-                editedPerson.Email = txtEmail.Text;
-                editedPerson.Birthday = dtpBirthday.Value;
+                    editedPerson.Name = txtName.Text;
+                    editedPerson.Adress = txtAdress.Text;
+                    editedPerson.PostNr = txtPostNr.Text;
+                    editedPerson.City = txtCity.Text;
+                    editedPerson.PhoneNr = txtPhoneNr.Text;
+                    editedPerson.Email = txtEmail.Text;
+                    editedPerson.Birthday = dtpBirthday.Value;
 
-                db.SaveChanges();
+                    db.SaveChanges();
+                }
+                //Search(txtSearch.Text, people);
+
+                //txtSearch.Clear();
+
+                LoadContacts();
             }
-            LoadContacts();
+            catch { }
         }
 
         private void cmdDelete_Click(object sender, EventArgs e)
         {
             using (var db = new AdressContext())
             {
-                SelectedPerson = people[lstContacts.SelectedIndex];
+                SelectedPerson = (Person)lstContacts.SelectedItem;
 
                 var deletedPerson = db.Persons.Find(SelectedPerson.PersonId);
 
@@ -157,8 +165,6 @@ namespace FirstAssignmentDatabases
             txtSearch.Clear();
 
             lstContacts.Items.Clear();
-
-            Search(txtSearch.Text, people);
         }
     }
 
