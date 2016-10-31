@@ -29,6 +29,7 @@ namespace FirstAssignmentDatabases
 
         private void LoadContacts()
         {
+            lstContacts.DataSource = null;
             lstContacts.Items.Clear();
 
             using (var db = new AdressContext())
@@ -39,7 +40,7 @@ namespace FirstAssignmentDatabases
 
                 foreach (var item in persons)
                 {
-                    lstContacts.Items.Add(item.Name);
+                    lstContacts.Items.Add(item);
                     people.Add(item);
                 }
             }
@@ -75,20 +76,12 @@ namespace FirstAssignmentDatabases
             txtPhoneNr.Text = "";
             txtEmail.Text = "";
             dtpBirthday.Value = DateTime.Now;
+
+            LoadContacts();
         }
 
         private void cmdEdit_Click(object sender, EventArgs e)
         {
-            //SelectedPerson = people[lstContacts.SelectedIndex];
-
-            //SqlConnection cn = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-
-            //cn.Open();
-            //SqlCommand cmd = cn.CreateCommand();
-            //cmd.CommandText = "UPDATE People(Name, Adress, PostNr, City, PhoneNr, Email, Birthday) VALUES(" + txtName.Text + ", " + txtAdress.Text + ", " + txtPostNr.Text + ", " + txtCity.Text + ", " + txtPhoneNr.Text + ", " + dtpBirthday + "WHERE People.Name = " + SelectedPerson.Name;
-
-            //cn.Close();
-
             using (var db = new AdressContext())
             {
                 SelectedPerson = people[lstContacts.SelectedIndex];
@@ -105,6 +98,7 @@ namespace FirstAssignmentDatabases
 
                 db.SaveChanges();
             }
+            LoadContacts();
         }
 
         private void cmdDelete_Click(object sender, EventArgs e)
@@ -121,6 +115,7 @@ namespace FirstAssignmentDatabases
 
                 lstContacts.Items.Remove(SelectedPerson.Name);
             }
+            LoadContacts();
         }
 
         private void lstContacts_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -129,26 +124,29 @@ namespace FirstAssignmentDatabases
             {
                 //Search(txtSearch.Text, people);
 
-                txtName.Text = people[lstContacts.SelectedIndex].Name;
-                txtAdress.Text = people[lstContacts.SelectedIndex].Adress;
-                txtPostNr.Text = people[lstContacts.SelectedIndex].PostNr;
-                txtCity.Text = people[lstContacts.SelectedIndex].City;
-                txtPhoneNr.Text = people[lstContacts.SelectedIndex].PhoneNr;
-                txtEmail.Text = people[lstContacts.SelectedIndex].Email;
-                dtpBirthday.Value = people[lstContacts.SelectedIndex].Birthday;
+                //SelectedPerson = people[lstContacts.SelectedIndex];
+                SelectedPerson = (Person)lstContacts.SelectedItem;
 
-                SelectedPerson = people[lstContacts.SelectedIndex];
+                txtName.Text = SelectedPerson.Name;
+                txtAdress.Text = SelectedPerson.Adress;
+                txtPostNr.Text = SelectedPerson.PostNr;
+                txtCity.Text = SelectedPerson.City;
+                txtPhoneNr.Text = SelectedPerson.PhoneNr;
+                txtEmail.Text = SelectedPerson.Email;
+                dtpBirthday.Value = SelectedPerson.Birthday;
             }
             catch { }
         }
 
         private void cmdSearch_Click(object sender, EventArgs e)
         {
-            Search(txtSearch.Text, people);
+            Search(txtSearch.Text, people, searchList);
         }
 
-        private void Search(string search, List<Person> people)
+        private void Search(string search, List<Person> people, List<Person> searchList)
         {
+
+            //searchList.Clear();
             lstContacts.Items.Clear();
 
             //using (var db = new AdressContext())
@@ -157,17 +155,26 @@ namespace FirstAssignmentDatabases
             //                   orderby p.PersonId
             //                   select p).ToList();
 
-            foreach (var item in people)
+            if (txtSearch.Text != "")
             {
-                if (item.Name.Contains(search))
+                foreach (var item in people)
                 {
-                    //lstContacts.Items.Add(item.Name);
-                    searchList.Add(item);
-
-                    lstContacts.DataSource = searchList;
+                    if (item.Name.Contains(search) || item.City.Contains(search) || item.Adress.Contains(search))
+                    {
+                        lstContacts.Items.Add(item);
+                        //searchList.Add(item);
+                    }
                 }
+                //lstContacts.DataSource = searchList;
             }
             //}
+        }
+
+        private void cmdClear_Click(object sender, EventArgs e)
+        {
+            //searchList.Clear();
+
+            LoadContacts();
         }
     }
 
@@ -181,5 +188,10 @@ namespace FirstAssignmentDatabases
         public string PhoneNr { get; set; }
         public string Email { get; set; }
         public DateTime Birthday { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

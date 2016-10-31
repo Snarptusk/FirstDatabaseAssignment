@@ -30,6 +30,9 @@
         {
             this.lblName = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmdSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.lblSearch = new System.Windows.Forms.Label();
             this.lstContacts = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cmdDelete = new System.Windows.Forms.Button();
@@ -48,9 +51,7 @@
             this.txtAdress = new System.Windows.Forms.TextBox();
             this.lblAdress = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.lblSearch = new System.Windows.Forms.Label();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.cmdSearch = new System.Windows.Forms.Button();
+            this.cmdClear = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -66,6 +67,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cmdClear);
             this.groupBox1.Controls.Add(this.cmdSearch);
             this.groupBox1.Controls.Add(this.txtSearch);
             this.groupBox1.Controls.Add(this.lblSearch);
@@ -76,6 +78,32 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Contacts";
+            // 
+            // cmdSearch
+            // 
+            this.cmdSearch.Location = new System.Drawing.Point(6, 205);
+            this.cmdSearch.Name = "cmdSearch";
+            this.cmdSearch.Size = new System.Drawing.Size(53, 23);
+            this.cmdSearch.TabIndex = 3;
+            this.cmdSearch.Text = "Search";
+            this.cmdSearch.UseVisualStyleBackColor = true;
+            this.cmdSearch.Click += new System.EventHandler(this.cmdSearch_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(6, 179);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(116, 20);
+            this.txtSearch.TabIndex = 2;
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(42, 163);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(41, 13);
+            this.lblSearch.TabIndex = 1;
+            this.lblSearch.Text = "Search";
             // 
             // lstContacts
             // 
@@ -245,31 +273,15 @@
             this.txtName.Size = new System.Drawing.Size(170, 20);
             this.txtName.TabIndex = 1;
             // 
-            // lblSearch
+            // cmdClear
             // 
-            this.lblSearch.AutoSize = true;
-            this.lblSearch.Location = new System.Drawing.Point(42, 163);
-            this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(41, 13);
-            this.lblSearch.TabIndex = 1;
-            this.lblSearch.Text = "Search";
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(6, 179);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(116, 20);
-            this.txtSearch.TabIndex = 2;
-            // 
-            // cmdSearch
-            // 
-            this.cmdSearch.Location = new System.Drawing.Point(6, 205);
-            this.cmdSearch.Name = "cmdSearch";
-            this.cmdSearch.Size = new System.Drawing.Size(116, 23);
-            this.cmdSearch.TabIndex = 3;
-            this.cmdSearch.Text = "Search";
-            this.cmdSearch.UseVisualStyleBackColor = true;
-            this.cmdSearch.Click += new System.EventHandler(this.cmdSearch_Click);
+            this.cmdClear.Location = new System.Drawing.Point(69, 205);
+            this.cmdClear.Name = "cmdClear";
+            this.cmdClear.Size = new System.Drawing.Size(53, 23);
+            this.cmdClear.TabIndex = 4;
+            this.cmdClear.Text = "Clear";
+            this.cmdClear.UseVisualStyleBackColor = true;
+            this.cmdClear.Click += new System.EventHandler(this.cmdClear_Click);
             // 
             // Form1
             // 
@@ -316,6 +328,7 @@
         private System.Windows.Forms.Button cmdSearch;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label lblSearch;
+        private System.Windows.Forms.Button cmdClear;
     }
 }
 
