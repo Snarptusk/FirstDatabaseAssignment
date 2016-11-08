@@ -110,19 +110,24 @@ namespace FirstAssignmentDatabases
 
         private void cmdDelete_Click(object sender, EventArgs e)
         {
-            using (var db = new AdressContext())
+            try
             {
-                SelectedPerson = (Person)lstContacts.SelectedItem;
+                using (var db = new AdressContext())
+                {
+                    SelectedPerson = (Person)lstContacts.SelectedItem;
 
-                var deletedPerson = db.Persons.Find(SelectedPerson.PersonId);
+                    var deletedPerson = db.Persons.Find(SelectedPerson.PersonId);
 
-                db.Persons.Remove(deletedPerson);
+                    db.Persons.Remove(deletedPerson);
 
-                db.SaveChanges();
+                    db.SaveChanges();
 
-                lstContacts.Items.Remove(SelectedPerson.Name);
+                    lstContacts.Items.Remove(SelectedPerson.Name);
+                }
             }
-            LoadContacts();
+            catch { }
+               LoadContacts();
+            
         }
 
         private void lstContacts_SelectedIndexChanged_1(object sender, EventArgs e)
